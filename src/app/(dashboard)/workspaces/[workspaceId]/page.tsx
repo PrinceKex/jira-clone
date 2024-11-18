@@ -1,5 +1,4 @@
 import { getCurrent } from '@/features/auth/queries'
-import { EditWorkspaceForm } from '@/features/workspaces/components/edit-workspace-form'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
@@ -7,11 +6,7 @@ const WorkspaceIdPage = async () => {
  const user = await getCurrent()
  if (!user) redirect('/sign-in')
 
- return (
-  <div>
-   <EditWorkspaceForm />
-  </div>
- )
+ return <div>WorkspaceIdPage</div>
 }
 
 export default WorkspaceIdPage
