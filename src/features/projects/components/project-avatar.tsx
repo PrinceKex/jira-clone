@@ -7,7 +7,7 @@ interface ProjectAvatarProps {
  image?: string
  name: string
  className?: string
- fallbackClassname: string
+ fallbackClassname?: string
 }
 
 export const ProjectAvatar = ({
