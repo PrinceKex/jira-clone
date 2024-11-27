@@ -1,4 +1,3 @@
-import WorkspaceIdJoinPage from '@/app/(standalone)/workspaces/[workspaceId]/join/[inviteCode]/page'
 import { z } from 'zod'
 
 export const createProjectSchema = z.object({
