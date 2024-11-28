@@ -53,8 +53,9 @@ export const CreateProjectForm = ({ onCancel }: CreateProjectFormProps) => {
     onSuccess: ({ data }) => {
      form.reset()
      //onCancel?.()
-     //router.push(`/workspaces/${data.$id}`)
+
      //TODO: Redirect to the project screen
+     router.push(`/workspaces/${workspaceId}/projects/${data.$id}`)
     },
    }
   )
