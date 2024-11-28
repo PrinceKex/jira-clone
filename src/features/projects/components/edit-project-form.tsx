@@ -23,6 +23,7 @@ import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Project } from '../types'
 import { useUpdateProject } from '../api/use-update-project'
+import { useDeleteProject } from '../api/use-delete-project'
 import { useConfirm } from '@/hooks/use-confirm'
 import { toast } from 'sonner'
 
@@ -37,8 +38,8 @@ export const EditProjectForm = ({
 }: EditProjectFormProps) => {
  const router = useRouter()
  const { mutate, isPending } = useUpdateProject()
- //  const { mutate: deleteProject, isPending: isDeletingProject } =
- //   useDeleteProject()
+ const { mutate: deleteProject, isPending: isDeletingProject } =
+  useDeleteProject()
 
  const [DeleteDialog, confirmDelete] = useConfirm(
   'Delete Project',
@@ -58,17 +59,17 @@ export const EditProjectForm = ({
 
  const handleDelete = async () => {
   const ok = await confirmDelete()
-  // if (!ok) return
-  // console.log('deleting...')
-  // deleteProject(
-  //  { param: { ProjectId: initialValues.$id } },
-  //  {
-  //   onSuccess: () => {
-  //    // router.push('/')
-  //    window.location.href = '/'
-  //   },
-  //  }
-  // )
+  if (!ok) return
+  console.log('deleting...')
+  deleteProject(
+   { param: { projectId: initialValues.$id } },
+   {
+    onSuccess: () => {
+     // router.push('/')
+     window.location.href = `/workspaces/${initialValues.workspaceId}`
+    },
+   }
+  )
  }
 
  const onSubmit = (values: z.infer<typeof updateProjectSchema>) => {

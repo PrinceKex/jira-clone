@@ -5,29 +5,28 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 type ResponseType = InferResponseType<
- (typeof client.api.projects)[':projectId']['$patch'],
+ (typeof client.api.projects)[':projectId']['$delete'],
  200
 >
 type RequestType = InferRequestType<
- (typeof client.api.projects)[':projectId']['$patch']
+ (typeof client.api.projects)[':projectId']['$delete']
 >
 
-export const useUpdateProject = () => {
+export const useDeleteProject = () => {
  const router = useRouter()
  const queryClient = new QueryClient()
  const mutation = useMutation<ResponseType, Error, RequestType>({
-  mutationFn: async ({ form, param }) => {
-   const response = await client.api.projects[':projectId']['$patch']({
-    form,
+  mutationFn: async ({ param }) => {
+   const response = await client.api.projects[':projectId']['$delete']({
     param,
    })
    if (!response.ok) {
-    throw new Error('Failed to update Project')
+    throw new Error('Failed to delete Project')
    }
    return await response.json()
   },
   onSuccess: ({ data }) => {
-   toast.success('Project updated successfully')
+   toast.success('Project deleted successfully')
    router.refresh()
    queryClient.invalidateQueries({ queryKey: ['projects'] })
    queryClient.invalidateQueries({ queryKey: ['project', data.$id] })
