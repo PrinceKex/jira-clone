@@ -85,15 +85,7 @@ export const EditWorkspaceForm = ({
   const ok = await confirmReset()
   if (!ok) return
   // console.log('deleting...')
-  resetInviteCode(
-   { param: { workspaceId: initialValues.$id } },
-   {
-    onSuccess: () => {
-     router.refresh()
-     //window.location.href = '/'
-    },
-   }
-  )
+  resetInviteCode({ param: { workspaceId: initialValues.$id } })
  }
 
  const onSubmit = (values: z.infer<typeof updateWorkspacesSchema>) => {
@@ -104,11 +96,8 @@ export const EditWorkspaceForm = ({
   mutate(
    { form: finalValues, param: { workspaceId: initialValues.$id } },
    {
-    onSuccess: ({ data }) => {
+    onSuccess: ({}) => {
      form.reset()
-     onCancel?.()
-     router.push(`/workspaces/${data.$id}`)
-     // TODO: Redirect to a new workspace
     },
    }
   )
