@@ -69,7 +69,7 @@ export const CreateTaskForm = ({
    {
     onSuccess: ({ data }) => {
      form.reset()
-     //onCancel?.()
+     onCancel?.()
      //TODO: Redirect to the new task screen
      //router.push(`/workspaces/${workspaceId}/Tasks/${data.$id}`)
     },
