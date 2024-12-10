@@ -15,6 +15,8 @@ import { DataTable } from './data-table'
 import { columns } from './columns'
 import { DataKanban } from './data-kanban'
 import { TaskStatus } from '../types'
+import { useBulkUpdateTask } from '../api/use-bulk-update-task'
+import { DataCalendar } from './data-calendar'
 
 export const TaskViewSwitcher = () => {
  const [{ status, assigneeId, projectId, dueDate }] = useTaskFilters()
@@ -25,6 +27,7 @@ export const TaskViewSwitcher = () => {
 
  const workspaceId = UseWorkspaceId()
  const { open } = useCreateTaskModal()
+ const { mutate: bulkUpdate } = useBulkUpdateTask()
  const { data: tasks, isLoading: isLoadingTasks } = useGetTasks({
   workspaceId,
   projectId,
@@ -35,9 +38,9 @@ export const TaskViewSwitcher = () => {
 
  const onKanbanChange = useCallback(
   (tasks: { $id: string; status: TaskStatus; position: number }[]) => {
-   console.log(tasks)
+   bulkUpdate({ json: { tasks } })
   },
-  []
+  [bulkUpdate]
  )
  return (
   <Tabs
@@ -76,11 +79,12 @@ export const TaskViewSwitcher = () => {
        <DataTable columns={columns} data={tasks?.documents ?? []} />
       </TabsContent>
       <TabsContent value='kanban' className='mt-0'>
-       {JSON.stringify(tasks)}
+       {/* {JSON.stringify(tasks)} */}
        <DataKanban data={tasks?.documents ?? []} onChange={onKanbanChange} />
       </TabsContent>
-      <TabsContent value='calender' className='mt-0'>
+      <TabsContent value='calender' className='mt-0 h-full pb-4'>
        {JSON.stringify(tasks)}
+       <DataCalendar data={tasks?.documents ?? []} />
       </TabsContent>
      </>
     )}
