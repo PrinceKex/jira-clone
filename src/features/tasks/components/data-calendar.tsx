@@ -13,6 +13,7 @@ import { Task } from '../types'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import './data-calendar.css'
 import { EventCard } from './event-card'
+import { CustomToolbar } from './custom-toolbar'
 
 const locales = {
  'en-US': enUS,
@@ -78,6 +79,7 @@ export const DataCalendar = ({ data }: DataCalendarProps) => {
       status={event.status}
      />
     ),
+    toolbar: () => <CustomToolbar date={value} onNavigate={handleNavigate} />,
    }}
   />
  )
