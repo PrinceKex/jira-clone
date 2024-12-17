@@ -3,11 +3,11 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 import { ProjectIdSettingsClient } from './client'
 
-const WorkspaceIdSettingsPage = async () => {
+const ProjectIdSettingsPage = async () => {
  const user = await getCurrent()
  if (!user) redirect('/sign-in')
 
  return <ProjectIdSettingsClient />
 }
 
-export default WorkspaceIdSettingsPage
+export default ProjectIdSettingsPage

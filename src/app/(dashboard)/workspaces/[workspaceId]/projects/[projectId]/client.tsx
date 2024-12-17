@@ -5,7 +5,7 @@ import { PageError } from '@/components/page-error'
 import { PageLoader } from '@/components/page-loader'
 import { Button } from '@/components/ui/button'
 import { useGetProject } from '@/features/projects/api/use-get-project'
-import { useGetProjectAnalytics } from '@/features/projects/api/use-get-project-anlytics'
+import { useGetProjectAnalytics } from '@/features/projects/api/use-get-project-analytics'
 
 import { ProjectAvatar } from '@/features/projects/components/project-avatar'
 import { useProjectId } from '@/features/projects/hooks/use-project-id'
