@@ -17,6 +17,7 @@ import {
 import Link from 'next/link'
 import { loginSchema } from '../schemas'
 import { useLogin } from '../api/use-login'
+import { signUpWithGithub, signUpWithGoogle } from '@/lib/oauth'
 
 // const formSchema = z.object({
 //  email: z.string().email(),
@@ -85,13 +86,25 @@ export const SignInCard = () => {
     <DottedSeparator />
    </div>
    <CardContent className='p-7 flex flex-col gap-y-4'>
-    <Button variant='secondary' size='lg' className='w-full' disabled={false}>
+    <Button
+     variant='secondary'
+     size='lg'
+     className='w-full'
+     disabled={false}
+     onClick={() => signUpWithGoogle()}
+    >
      <FcGoogle className='mr-2 size-5' />
      Login with Google
     </Button>
    </CardContent>
    <CardContent className='p-7 flex flex-col gap-y-4'>
-    <Button variant='secondary' size='lg' className='w-full' disabled={false}>
+    <Button
+     variant='secondary'
+     size='lg'
+     className='w-full'
+     disabled={false}
+     onClick={() => signUpWithGithub()}
+    >
      <FaGithub className='mr-2 size-5' />
      Login with Github
     </Button>

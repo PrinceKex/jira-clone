@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import React, { useRef } from 'react'
+import React from 'react'
 import { Form, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -13,11 +13,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Avatar } from '@/components/ui/avatar'
-import Image from 'next/image'
-import { AvatarFallback } from '@radix-ui/react-avatar'
-import { ImageIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { createTaskSchema } from '../schemas'
 import { UseWorkspaceId } from '@/features/workspaces/hooks/use-workspace-id'
@@ -53,7 +48,6 @@ export const CreateTaskForm = ({
  memberOptions,
 }: CreateTaskFormProps) => {
  const workspaceId = UseWorkspaceId()
- const router = useRouter()
  const { mutate, isPending } = useCreateTask()
 
  const form = useForm<z.infer<typeof createTaskSchema>>({
@@ -67,7 +61,7 @@ export const CreateTaskForm = ({
   mutate(
    { json: { ...values, workspaceId } },
    {
-    onSuccess: ({ data }) => {
+    onSuccess: () => {
      form.reset()
      onCancel?.()
      //TODO: Redirect to the new task screen

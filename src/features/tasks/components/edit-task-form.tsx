@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import React, { useRef } from 'react'
+import React from 'react'
 import { Form, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -13,7 +13,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { createTaskSchema } from '../schemas'
 
